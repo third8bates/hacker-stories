@@ -18,23 +18,33 @@ const list = [
 ];
 
 function App() {
-
   return (
-      <div>
-        <h1>My Hacker Stories</h1>
+    <div>
+      <h1>My Hacker Stories</h1>
 
-        <label htmlFor="search">Search: </label>
-        <input id="search" type="text" />
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
 
-        <hr />
+      <hr />
 
+      <ul>
         <ul>
           {list.map(function (item) {
-            return <li key={item.objectID}>{item.title}</li>
+            return (
+              <li key={item.objectID}>
+                <span>
+                  <a href={item.url}>{item.title}</a>
+                </span>
+                <span>{item.author}</span>
+                <span>{item.num_comments}</span>
+                <span>{item.points}</span>
+              </li>
+            );
           })}
         </ul>
-      </div>
+      </ul>
+    </div>
   );
 }
 
-export default App;
+export default Ap
