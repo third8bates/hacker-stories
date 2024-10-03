@@ -35,6 +35,7 @@ const App = () => {
   );
 }
 
+//declaration of Search component
 const Search = () => {
   return (
     <div>
