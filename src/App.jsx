@@ -26,6 +26,10 @@ function App() {
 
       <hr />
 
+      {/*creating an instance of List component*/}
+      <List />
+
+      {/*creating another instance of List component*/}
       <List />
     </div>
   );
@@ -40,6 +44,7 @@ function Search() {
   )
 }
 
+//declaration of List component
 function List() {
   return (
     <ul>
