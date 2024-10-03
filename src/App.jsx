@@ -17,7 +17,7 @@ const list = [
   },
 ];
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>My Hacker Stories</h1>
@@ -35,7 +35,7 @@ function App() {
   );
 }
 
-function Search() {
+const Search = () => {
   return (
     <div>
       <label htmlFor="search">Search: </label>
@@ -45,10 +45,10 @@ function Search() {
 }
 
 //declaration of List component
-function List() {
+const List = () => {
   return (
     <ul>
-      {list.map(function (item) {
+      {list.map((item) => {
         return (
           <li key={item.objectID}>
             <span>
