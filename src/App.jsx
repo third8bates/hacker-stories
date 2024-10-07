@@ -1,3 +1,7 @@
+//The Road to React Exercises
+//Jesse Thieme
+//October 7, 2024
+
 import * as React from 'react';
 
 const App = () => {
@@ -20,11 +24,18 @@ const App = () => {
     },
   ];
 
+  // A
+  const handleSearch = (event) => {
+    // D
+    console.log(event.target.value);
+  };
+
   return (
     <div>
       <h1>My Hacker Stories</h1>
 
-      <Search />
+      {/* // B */}
+      <Search onSearch={handleSearch}/>
 
       <hr />
 
@@ -34,11 +45,14 @@ const App = () => {
 };
 
 //declaration of Search component
-const Search = () => {
+const Search = (props) => {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
+
+    // C
+    props.onSearch(event);
   };
 
   return (
