@@ -17,8 +17,7 @@ const list = [
   },
 ];
 
-const App = () => {
-  return (
+const App = () => (
     <div>
       <h1>My Hacker Stories</h1>
 
@@ -32,22 +31,18 @@ const App = () => {
       {/*creating another instance of List component*/}
       <List />
     </div>
-  );
-}
+);
 
 //declaration of Search component
-const Search = () => {
-  return (
+const Search = () => (
     <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" />
     </div>
-  )
-}
+);
 
 //declaration of List component
-const List = () => {
-  return (
+const List = () => (
     <ul>
       {list.map((item) => {
         return (
@@ -62,7 +57,6 @@ const List = () => {
         );
       })}
     </ul>
-  )
-}
+);
 
 export default App;
