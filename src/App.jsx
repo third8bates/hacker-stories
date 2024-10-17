@@ -63,15 +63,15 @@ const App = () => {
 
 //declaration of Search component
 const Search = ({ search, onSearch }) => (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input 
-        id="search" 
-        type="text"
-        value={search}
-        onChange={onSearch}
-      />
-    </div>
+  <React.Fragment>
+    <label htmlFor="search">Search: </label>
+    <input 
+      id="search" 
+      type="text"
+      value={search}
+      onChange={onSearch}
+    />
+  </React.Fragment>
 );
 
 // Variarion 2: Spread and Rest Operators
