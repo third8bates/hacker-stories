@@ -64,7 +64,7 @@ const App = () => {
 
       <InputWithLabel
         id="search"
-        label="Search"
+        //label="Search"
         value={searchTerm}
         isFocused
         onInputChange={handleSearch}
@@ -119,20 +119,15 @@ const List = ({ list, onRemoveItem }) => (
   <ul>
     {list.map((item) => (
       <Item 
-      key={item.objectID} 
-      item={item} 
+        key={item.objectID} 
+        item={item} 
         onRemoveItem={onRemoveItem}
       />
     ))}
   </ul>
 );
 
-const Item = ({ item, onRemoveItem }) => {
-  const handleRemoveItem =() => {
-    onRemoveItem(item);
-  };
-  
-  return (
+const Item = ({ item, onRemoveItem }) => (
     <li>
       <span>
         <a href={item.url}>{item.title}</a>
@@ -141,12 +136,11 @@ const Item = ({ item, onRemoveItem }) => {
       <span>{item.num_comments}</span>
       <span>{item.points}</span>
       <span>
-        <button type="button" onClick={handleRemoveItem}>
+        <button type="button" onClick={() => onRemoveItem(item)}>
           Dismiss
         </button>
       </span>
     </li>
   );
-};
 
 export default App;
