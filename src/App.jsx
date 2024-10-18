@@ -23,6 +23,14 @@ const initialStories = [
   },
 ];
 
+const getAsyncStories = () =>
+  new Promise((resolve) =>
+    setTimeout(
+      () => resolve({ data: { stories: initialStories } }),
+      2000
+    )
+  );
+
 const useStorageState = (key, initialState) => {
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
@@ -38,13 +46,20 @@ const useStorageState = (key, initialState) => {
 const App = () => {
   const [searchTerm, setSearchTerm] = useStorageState(
     'search',
-    'React');
+    'React'
+  );
 
-  const[stories, setStories] = React.useState(initialStories);
+  const[stories, setStories] = React.useState([]);
+
+  React.useEffect(() => {
+    getAsyncStories().then(result => {
+      setStories(result.data.stories);
+    });
+  }, []);
 
   const handleRemoveStory = (item) => {
-    const newStories =stories.filter(
-    (story) => item.ObjectID !== story.objectID
+    const newStories = stories.filter(
+    (story) => item.objectID !== story.objectID
     );
 
     setStories(newStories);
@@ -64,7 +79,6 @@ const App = () => {
 
       <InputWithLabel
         id="search"
-        //label="Search"
         value={searchTerm}
         isFocused
         onInputChange={handleSearch}
@@ -87,13 +101,10 @@ const InputWithLabel = ({
   isFocused,
   children,
  }) => {
-  // A
   const inputRef = React.useRef();
 
-  // C
   React.useEffect(() => {
     if (isFocused && inputRef.current) {
-      // D
       inputRef.current.focus();
     }
   }, [isFocused]);
@@ -102,7 +113,6 @@ const InputWithLabel = ({
     <>
       <label htmlFor={id}>{children}</label>
       &nbsp;
-        {/* B */}
       <input
         ref={inputRef}
         id={id}
@@ -114,7 +124,6 @@ const InputWithLabel = ({
   );
 };
 
-//declaration of List component
 const List = ({ list, onRemoveItem }) => (
   <ul>
     {list.map((item) => (
