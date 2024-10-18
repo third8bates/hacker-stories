@@ -49,7 +49,7 @@ const App = () => {
     'React'
   );
 
-  const[stories, setStories] = React.useState([]);
+  const [stories, setStories] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
 
@@ -57,11 +57,11 @@ const App = () => {
     setIsLoading(true);
 
     getAsyncStories()
-      .then((result => {
+      .then((result) => {
         setStories(result.data.stories);
         setIsLoading(false);
     })
-      .catch(() => setIsError));
+      .catch(() => setIsError(true));
   }, []);
 
   const handleRemoveStory = (item) => {
@@ -79,12 +79,6 @@ const App = () => {
   const searchedStories = stories.filter((story) => 
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  /* REMOVE?
-  if (isLoading) {
-    return <p>Loading...</p>
-  } 
-  */
 
   return (
     <div>
