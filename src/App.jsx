@@ -1,7 +1,7 @@
 // The Road to React Exercises
 // Jesse Thieme 
 // October 24, 2024
-// Author's source code to compare against: https://bit.ly/3S8xI6D
+// Author's source code, used to compare and validate my code against: https://bit.ly/3S8xI6D
 
 import * as React from 'react';
 import axios from 'axios';
