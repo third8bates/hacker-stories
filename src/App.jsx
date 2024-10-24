@@ -1,7 +1,7 @@
 // The Road to React Exercises
 // Jesse Thieme 
 // October 24, 2024
-// Author's source code, used to compare and validate my code against: https://bit.ly/3S8xI6D
+// Author's source code, used to compare and validate my code against: 
 
 import * as React from 'react';
 import axios from 'axios';
@@ -98,29 +98,32 @@ const App = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
+
+    event.preventDefault();
   };
 
   return (
     <div>
       <h1>My Hacker Stories</h1>
 
-      <InputWithLabel
-        id="search"
-        value={searchTerm}
-        isFocused
-        onInputChange={handleSearchInput}
-      >
-        <strong>Search:</strong>
-      </InputWithLabel>
+      <form onSubmit={handleSearchSubmit}>
+        <InputWithLabel
+          id="search"
+          value={searchTerm}
+          isFocused
+          onInputChange={handleSearchInput}
+        >
+          <strong>Search:</strong>
+        </InputWithLabel>
 
-      <button
-      type="button"
-      disabled={!searchTerm}
-      onClick={handleSearchSubmit}>
-        Submit
-      </button>
+        <button
+        type="submit"
+        disabled={!searchTerm}>
+          Submit
+        </button>
+      </form>
 
       <hr />
 
