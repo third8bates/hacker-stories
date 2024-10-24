@@ -1,6 +1,6 @@
 //The Road to React Exercises
 //Jesse Thieme
-//October 23, 2024
+//October 24, 2024
 
 import * as React from 'react';
 
@@ -92,9 +92,11 @@ const App = () => {
   );
 
   React.useEffect(() => {
+    if (searchTerm === '') return;
+
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
-    fetch(`${API_ENDPOINT}react`) // B
+    fetch(`${API_ENDPOINT}${searchTerm}`) // B
       .then((response) => response.json()) // C
       .then((result) => {
         dispatchStories({
@@ -118,9 +120,11 @@ const App = () => {
     setSearchTerm(event.target.value);
   };
 
+  /*** can be omitted since data filtered directly via API
   const searchedStories = stories.data.filter((story) =>
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  */
 
   return (
     <div>
@@ -143,7 +147,7 @@ const App = () => {
         <p>Loading...</p>
       ) : (
         <List 
-          list={searchedStories} 
+          list={stories.data} 
           onRemoveItem={handleRemoveStory} 
         />
       )}
