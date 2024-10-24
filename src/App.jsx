@@ -1,9 +1,10 @@
 //The Road to React Exercises
 //Jesse Thieme
-//October 22, 2024
+//October 23, 2024
 
 import * as React from 'react';
 
+/*
 const initialStories = [
   {
     title: 'React',
@@ -22,21 +23,24 @@ const initialStories = [
     objectID: 1,
   },
 ];
+*/
 
+/*
 const getAsyncStories = () =>
   new Promise((resolve) =>
     () => resolve({ data: { stories: initialStories } }),
       2000);
+*/
 
 const storiesReducer = (state, action) => {
   switch (action.type) {
-    case 'STORIES_FETCH_INT':
+    case 'STORIES_FETCH_INIT':
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
-    case 'RSTORIES_FETCH_SUCCESS':
+    case 'STORIES_FETCH_SUCCESS':
       return {
         ...state,
         isLoading: false,
@@ -73,6 +77,9 @@ const useStorageState = (key, initialState) => {
   return [value, setValue];
 };
 
+// A
+const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useStorageState(
     'search',
@@ -85,13 +92,14 @@ const App = () => {
   );
 
   React.useEffect(() => {
-    dispatchStories({ type: 'STORIES_FETCH' });
+    dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
-    getAsyncStories()
+    fetch(`${API_ENDPOINT}react`) // B
+      .then((response) => response.json()) // C
       .then((result) => {
         dispatchStories({
           type: 'STORIES_FETCH_SUCCESS',
-          payload: result.data.stories,
+          payload: result.hits, // D
         });
       })
       .catch(() =>
