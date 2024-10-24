@@ -1,7 +1,7 @@
 //The Road to React Exercises
 // Jesse Thieme
 // October 24, 2024
-// Author's source code: https://bit.ly/3O8sXbU
+// Author's source code: 
 
 import * as React from 'react';
 import axios from 'axios';
@@ -68,20 +68,15 @@ const App = () => {
     { data: [], isLoading: false, isError: false }
   );
 
-  const handleFetchStories = React.useCallback(() => {
+  const handleFetchStories = React.useCallback(async () => {
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
-    axios
-      .get(url)
-      .then((result) => {
-        dispatchStories({
-          type: 'STORIES_FETCH_SUCCESS',
-          payload: result.data.hits,
-        });
-      })
-      .catch(() =>
-        dispatchStories({ type: 'STORIES_FETCH_FAILURE' })
-      );
+    const result = await axios.get(url);
+
+    dispatchStories({
+      typ: 'STORIES_FETCH_SUCCESS',
+      payload: result.data.hits,
+    });
   }, [url]);
 
   React.useEffect(() => {
