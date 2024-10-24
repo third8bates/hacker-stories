@@ -49,7 +49,6 @@ const useStorageState = (key, initialState) => {
   return [value, setValue];
 };
 
-// A
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
 const App = () => {
@@ -63,12 +62,7 @@ const App = () => {
     { data: [], isLoading: false, isError: false }
   );
 
-  React.useEffect(() => {
-    // if `searchTerm` is not present
-    // e.g. null, emoty string, undefined
-    // do nothing
-    // more generalized condition than sarchTerm === ''
-
+  const handleFetchStories = React.useCallback(() => {
     if (!searchTerm) return;
 
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
@@ -86,9 +80,13 @@ const App = () => {
       );
   }, [searchTerm]);
 
+  React.useEffect(() => {
+    handleFetchStories();
+  }, [handleFetchStories]);
+
   const handleRemoveStory = (item) => {
     dispatchStories({
-      type: 'REMOVE_Story',
+      type: 'REMOVE_STORY',
       payload: item,
     });
   };
