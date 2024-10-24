@@ -92,7 +92,16 @@ const App = () => {
   );
 
   React.useEffect(() => {
+    // if `searchTerm` is not present
+    // e.g. null, emoty string, undefined
+    // do nothing
+    // more generalized condition than sarchTerm === ''
+
+    /*
     if (searchTerm === '') return;
+    */
+
+    if (!searchTerm) return;
 
     dispatchStories({ type: 'STORIES_FETCH_INIT' });
 
@@ -107,7 +116,7 @@ const App = () => {
       .catch(() =>
         dispatchStories({ type: 'STORIES_FETCH_FAILURE' })
       );
-  }, []);
+  }, [searchTerm]);
 
   const handleRemoveStory = (item) => {
     dispatchStories({
