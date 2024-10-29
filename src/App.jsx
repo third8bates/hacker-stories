@@ -5,8 +5,8 @@
 
 import * as React from 'react';
 import axios from 'axios';
-import clsx from 'clsx';
-import './App.module.css';
+//import clsx from 'clsx';
+import styles from './App.module.css';
 
 // somewhere in a className attribute //
 // className={clsx(styles.button, { [styles.buttonLarge] isLarge })}
