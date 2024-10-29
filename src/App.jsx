@@ -1,7 +1,7 @@
 // The Road to React Exercises
 // Jesse Thieme 
 // October 30, 2024
-// Author's source code, used to compare and validate my code against: ?
+// Author's source code, used to compare and validate my code against: https://bit.ly/48UtG8s
 
 import * as React from 'react';
 import axios from 'axios';
@@ -55,18 +55,18 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   transition: all 0.1s ease-in;
-  
+
   &:hover {
-  background: #171212;
-  color: #ffffff;
-}
+    background: #171212;
+    color: #ffffff;
+  }
 `;
 
-const StyledButtonSmall = styled(styledButton)`
+const StyledButtonSmall = styled(StyledButton)`
   padding: 5px;
 `;
 
-const StyledButtonLarge = styled(styledButton)`
+const StyledButtonLarge = styled(StyledButton)`
   padding: 10px;
 `;
 
@@ -191,14 +191,16 @@ const App = () => {
 
   return (
 
-    <div className={styles.container}>
-      <h1 className={styles.headlinePrimary}>My Hacker Stories</h1>
+    <StyledContainer>
+      <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary>
 
       <SearchForm
         searchTerm={searchTerm}
         onSearchInput={handleSearchInput}
         onSearchSubmit={handleSearchSubmit}
       />
+
+      <hr />
 
       {stories.isError && <p>Something went wrong...</p>}
 
@@ -210,7 +212,7 @@ const App = () => {
           onRemoveItem={handleRemoveStory} 
         />
       )}
-    </div>
+    </StyledContainer>
   );
 };
 
@@ -263,7 +265,6 @@ const InputWithLabel = ({
         type={type}
         value={value}
         onChange={onInputChange}
-        className={styles.input}
       />
     </>
   );
@@ -286,11 +287,11 @@ const Item = ({ item, onRemoveItem }) => (
     <StyledColumn width="40%">
       <a href={item.url}>{item.title}</a>
     </StyledColumn>
-    <StyledColumn width="30%"{item.author}</StyledColumn>
-    <StyledColumn width="10%"{item.num_comments}</StyledColumn>
-    <StyledColumn width="10%"{item.points}</StyledColumn>
+    <StyledColumn width="30%">{item.author}</StyledColumn>
+    <StyledColumn width="10%">{item.num_comments}</StyledColumn>
+    <StyledColumn width="10%">{item.points}</StyledColumn>
     <StyledColumn width="10%">
-      <StyledButtonSmall>
+      <StyledButtonSmall
         type="button" 
         onClick={() => onRemoveItem(item)}
       >
