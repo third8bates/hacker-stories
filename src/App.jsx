@@ -1,16 +1,16 @@
 // The Road to React Exercises
 // Jesse Thieme 
 // October 30, 2024
-// Author's source code, used to compare and validate my code against: https://bit.ly/48UtG8s
+// Author's source code, used to compare and validate my code against: N/A
 
 import * as React from 'react';
 import axios from 'axios';
-//import clsx from 'clsx';
 //import styles from './App.module.css';
 import styled from 'styled-components';
 
-// somewhere in a className attribute //
-// className={clsx(styles.button, { [styles.buttonLarge] isLarge })}
+
+//import { ReactComponent as Check } from './check.svg'; <-- CODE FROM BOOK DIDN'T WORK
+import Check from './check.svg?react';
 
 const StyledContainer = styled.div`
   height: 100vw;
@@ -64,6 +64,11 @@ const StyledButton = styled.button`
 
 const StyledButtonSmall = styled(StyledButton)`
   padding: 5px;
+
+  &:hover>svg>g{
+    fill: #ffffff;
+    stroke: #ffffff;
+  }
 `;
 
 const StyledButtonLarge = styled(StyledButton)`
@@ -295,7 +300,7 @@ const Item = ({ item, onRemoveItem }) => (
         type="button" 
         onClick={() => onRemoveItem(item)}
       >
-        Dismiss
+        <Check height="18px" width="18px"/>
       </StyledButtonSmall>
     </StyledColumn>
   </StyledItem>
