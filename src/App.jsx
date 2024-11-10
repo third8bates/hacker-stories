@@ -333,6 +333,6 @@ const Item = ({ item, onRemoveItem }) => (
   </StyledItem>
  );
 
-export default App;
+ export default App;
 
-export { storiesReducer, SearchForm, InputWithLabel, List, Item };
+ export { storiesReducer, SearchForm, InputWithLabel, List, Item };
