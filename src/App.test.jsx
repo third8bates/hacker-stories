@@ -1,4 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
+import axios from 'axios';
+
 import {
   render,
   screen,
@@ -33,6 +35,8 @@ const storyTwo = {
 };
 
 const stories = [storyOne, storyTwo];
+
+vi.mock('axios');
 
 describe('storiesReducer', () => {
   it('removes a story from all stories', () => {
@@ -115,6 +119,30 @@ describe('SearchForm', () => {
 
     expect(searchFormProps.onSearchSubmit).toHaveBeenCalledTimes(1);
   });
+});
+
+describe('App', () => {
+    it('succeeds fetching data', async () => {
+        const promise = Promise.resolve({
+            data: {
+                hits: stories,
+            },
+        });
+
+        axios.get.mockImplementationOnce(() => promise);
+
+        render(<App />);
+
+        expect(screen.queryByText(/Loading/)).toBeInTheDocument();
+
+        await waitFor(async () => await promise);
+
+        expect(screen.queryByText(/Loading/)).toBeNull();
+
+        expect(screen.queryByText('React')).toBeInTheDocument();
+        expect(screen.queryByText('Redux')).toBeInTheDocument();
+        expect(screen.queryAllByText('Dismiss').length).toBe(2);
+    });
 });
 
 /*
