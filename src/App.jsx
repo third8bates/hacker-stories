@@ -1,12 +1,13 @@
 import * as React from 'react';
 import axios from 'axios';
 //import styles from './App.module.css';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 //import { ReactComponent as Check } from './check.svg'; <-- CODE FROM BOOK DIDN'T WORK
-import Check from './check.svg?react';
+//import Check from './check.svg?react';
 import { SearchForm } from './SearchForm';
 import { List } from './List';
 
+/*
 const StyledContainer = styled.div`
   height: 100vw;
   padding: 20px;
@@ -90,6 +91,7 @@ const StyledInput = styled.input`
 
   font-size: 24px;
 `;
+*/
 
 const storiesReducer = (state, action) => {
   switch (action.type) {
@@ -125,34 +127,18 @@ const storiesReducer = (state, action) => {
 };
 
 const useStorageState = (key, initialState) => {
-  const isMounted = React.useRef(false);
-
   const [value, setValue] = React.useState(
     localStorage.getItem(key) || initialState
   );
 
   React.useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-    } else {
-      console.log('A');
-      localStorage.setItem(key, value);
-    }
+    localStorage.setItem(key, value);
   }, [value, key]);
 
   return [value, setValue];
 };
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
-
-const getSumComments = (stories) => {
-  console.log('C');
-
-  return stories.data.reduce(
-    (result, value) => result + value.num_comments,
-    0
-  );
-};
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useStorageState(
@@ -185,16 +171,15 @@ const App = () => {
   }, [url]);
 
   React.useEffect(() => {
-    console.log('How many times do I log?')
     handleFetchStories();
   }, [handleFetchStories]);
 
-  const handleRemoveStory = React.useCallback((item) => {
+  const handleRemoveStory = (item) => {
     dispatchStories({
       type: 'REMOVE_STORY',
       payload: item,
     });
-  }, []);
+  };
 
   const handleSearchInput = (event) => {
     setSearchTerm(event.target.value);
@@ -206,17 +191,9 @@ const App = () => {
     event.preventDefault();
   };
 
-  console.log('B:App');
-
-  const sumComments = React.useMemo(
-    () => getSumComments(stories),
-    [stories]
-  );
-
   return (
-
-    <StyledContainer>
-      <StyledHeadlinePrimary>My Hacker Stories with {sumComments} comments</StyledHeadlinePrimary>
+    <div>
+      <h1>My Hacker Stories</h1>
 
       <SearchForm
         searchTerm={searchTerm}
@@ -226,17 +203,15 @@ const App = () => {
 
       <hr />
 
-      {stories.isError && <p>Something went wrong...</p>}
+      {stories.isError && <p>Something went wrong ...</p>}
 
       {stories.isLoading ? (
-        <p>Loading...</p>
+        <p>Loading ...</p>
       ) : (
-        <List 
-          list={stories.data} 
-          onRemoveItem={handleRemoveStory} 
-        />
+        <List list={stories.data} onRemoveItem={handleRemoveStory} />
       )}
-    </StyledContainer>
+    </div>
   );
 };
- export default App;
+
+export default App;
