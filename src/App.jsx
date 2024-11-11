@@ -2,10 +2,10 @@ import * as React from 'react';
 import axios from 'axios';
 //import styles from './App.module.css';
 import styled from 'styled-components';
-
-
 //import { ReactComponent as Check } from './check.svg'; <-- CODE FROM BOOK DIDN'T WORK
 import Check from './check.svg?react';
+import { SearchForm } from './SearchForm';
+import { List } from './List';
 
 const StyledContainer = styled.div`
   height: 100vw;
@@ -239,61 +239,4 @@ const App = () => {
     </StyledContainer>
   );
 };
-
-const SearchForm = ({
-  searchTerm,
-    onSearchInput,
-    onSearchSubmit,
-  }) => (
-  <StyledSearchForm onSubmit={onSearchSubmit}>
-    <InputWithLabel
-      id="search"
-      value={searchTerm}
-      isFocused
-      onInputChange={onSearchInput}>
-      <strong>Search:</strong>
-    </InputWithLabel>
-
-    <StyledButtonLarge type="submit" 
-      disabled={!searchTerm}>
-        Submit
-    </StyledButtonLarge>
-  </StyledSearchForm>
-);
-
-const InputWithLabel = ({ 
-  id, 
-  value, 
-  type = 'text',
-  onInputChange,
-  isFocused,
-  children,
- }) => {
-  const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-  return (
-    <>
-      <StyledLabel htmlFor={id}>
-        {children}
-      </StyledLabel>
-      &nbsp;
-      <StyledInput
-        ref={inputRef}
-        id={id}
-        type={type}
-        value={value}
-        onChange={onInputChange}
-      />
-    </>
-  );
-};
-
  export default App;
-
- export { storiesReducer, SearchForm, InputWithLabel, List, Item };
