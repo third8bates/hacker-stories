@@ -9,9 +9,9 @@ import axios from 'axios';
 import App, {
   storiesReducer,
   Item,
-  List,
+  //List,
   SearchForm,
-  InputWithLabel,
+  //InputWithLabel,
 } from './App';
 
 vi.mock('axios');
